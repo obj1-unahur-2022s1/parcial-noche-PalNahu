@@ -1,19 +1,29 @@
+/*
+1) La mejor opción para manejar el peso en las comidas era la siguiente:
+- método abstracto peso en Plato
+- const property peso en Provoleta
+- en esAbundante() usar ```self.peso()```
+
+2) La mejor opción para la valoración y aptoVegetariano  también era definir un método abstracto en Plato para que luego cada sub-clase implemente y retorne el valor que corresponde.
+3) En ```valoracion()``` de Parrillada era conveniente usar la delegación en métodos auxiliares para encontrar el cortes de máxima calidad. Y también podias usar el 0.max() para que no de un número negativo.
+4) Los cortes era una clase Corte en lugar de objectos
+5) En los método de consulta que pones ```method xzy() = ``` no hace falta la palabrá return.
+* */
 class Plato {
-	var property peso
 	
-	var property aptoVegetariano
-	
+	method peso()
+	method aptoVegetariano()
 	method valoracion()
 	
 	method esAbundante(){
-		return peso >250
+		return self.peso() >250
 	}
 }
 
 class Provoleta inherits Plato{
 	
-	var property tieneEspecias
-	
+	const property tieneEspecias
+	const property peso
 	override method aptoVegetariano(){return not self.tieneEspecias()}
 	
 	method esEspecial(){return self.esAbundante() or self.tieneEspecias()}
@@ -62,21 +72,28 @@ object panMasaMadre{
 }
 
 class Parrillada inherits Plato{
-	var cortesPedidos=[]
+	const cortesPedidos=[]
 	
 	method cortesPedidos(unCorte){
 		cortesPedidos.add(unCorte)
 	}
 	
-	override method peso()= return cortesPedidos.sum{e => e.peso()}
+	override method peso()=  cortesPedidos.sum{e => e.peso()}
 	
 	override method valoracion(){
-		return 15*cortesPedidos.max{e => e.calidad()}.calidad() - cortesPedidos.size()
+		return 0.max(15*self.maximaCalidadDeCortes() -  cortesPedidos.size())
 	}
 	
-
+	method maximaCalidadDeCortes() = cortesPedidos.max({e => e.calidad()}).calidad()
+	override method aptoVegetariano()= false
 }
 
+class Corte {
+	var property nombre
+	var property peso
+	var property calidad
+}
+/* 
 object asado{
 	var property calidad = 10
 	var property peso = 250
@@ -93,7 +110,7 @@ object chorizo{
 	var property peso = 50
 }
 
-
+*/
 
 
 

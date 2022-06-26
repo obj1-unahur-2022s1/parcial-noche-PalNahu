@@ -2,26 +2,26 @@ import comidas.*
 import comensales.*
 describe "Test de Comensales" {
 	const vege = new Vegetarianos(peso=68500)
-	const provoleta = new Provoleta(tieneEspecias=true, peso=190, aptoVegetariano=false)
-	const hamVege = new HamburguesaVegetariana(pan=panMasaMadre, peso=250, aptoVegetariano=true, legumbreUsada="garbanzos")
-	const hamVege2 = new HamburguesaVegetariana(pan=panMasaMadre, peso=250, aptoVegetariano=true, legumbreUsada="garbanzos")
+	const provoleta = new Provoleta(tieneEspecias=true, peso=190)
+	const hamVege = new HamburguesaVegetariana(pan=panMasaMadre,  legumbreUsada="garbanzos")
+	const hamVege2 = new HamburguesaVegetariana(pan=panMasaMadre, legumbreUsada="garbanzos")
 	
 	const comePopu = new HambrePopular(peso=85000)
-	const parrillada = new Parrillada(aptoVegetariano=false, peso=500)
+	const parrillada = new Parrillada()
 	
 	const paladarFino = new PaladarFino(peso=65000)
-	const hamCarne = new HamburguesaDeCarne(pan=panMasaMadre, peso=250, aptoVegetariano=false)
+	const hamCarne = new HamburguesaDeCarne(pan=panMasaMadre)
 	
 	const paladarFino2 = new PaladarFino(peso=60000)
-	const hamCarne2 = new HamburguesaDeCarne(pan=panCasero, peso=250, aptoVegetariano=false)
+	const hamCarne2 = new HamburguesaDeCarne(pan=panCasero)
 	method initialize() {
 		vege.comer(provoleta)
 		vege.comer(hamVege)
 		vege.comer(hamVege2)
 		
-		parrillada.cortesPedidos(asado)
-		parrillada.cortesPedidos(entrania)
-		parrillada.cortesPedidos(chorizo)
+		parrillada.cortesPedidos(new Corte(nombre="asado", peso=250, calidad=10))
+		parrillada.cortesPedidos(new Corte(nombre="entrania", peso=200, calidad=7))
+		parrillada.cortesPedidos(new Corte(nombre="chorizo", peso=50, calidad=8))
 	}
 	
 	test "Vegetariano satisfecho " {
