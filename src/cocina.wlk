@@ -1,9 +1,14 @@
+/*
+ * listaDeComidaDeComensal esta mail
+ En eligir ```elegirPlato()``` falto remover el plato de la ofertaComida
+ * 
+ */
 import comidas.*
 import comensales.*
 /*Considero que la cocina es un objeto ya que esta misma hay una sola ya que es una sola parrila */
 
 object cocina{
-	var ofertaComida = []
+	const ofertaComida = []
 	
 	method agregarComida(unaComida){
 		ofertaComida.add(unaComida)
@@ -22,13 +27,14 @@ object cocina{
 	}
 	
 	method listaDeComidaDeComensal(unComensal){
-		return unComensal.comidaQueLeGusta()
+		return ofertaComida.filter({c=> unComensal.leAgrada(c)})
 	}
 	
 	method elegirPlato(unComensal){
-		if(unComensal.comidaQueLeGusta().size()> 0){
-			var comida = self.sacarComida(unComensal.comidaQueLeGusta().anyOne())
+		if(not unComensal.comidaQueLeGusta().isEmpty()){
+			const comida = self.sacarComida(unComensal.comidaQueLeGusta().anyOne())
 			unComensal.comer(comida)
+			ofertaComida.remove(comida)
 		}
 		else{
 			self.error("ERROR: Al comensal no le gusta ningún plato")

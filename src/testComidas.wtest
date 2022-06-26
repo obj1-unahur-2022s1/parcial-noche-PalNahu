@@ -1,18 +1,22 @@
+/*
+ * Ajustes en los test para que funciones con la solución de la corrección
+ * En los método de consulta que pones ```method xzy() = ``` no hace falta la palabra return. 
+ */
 import comidas.*
 describe "Test de Comidas" {
-	const hamCarne = new HamburguesaDeCarne(pan=panCasero, peso=250, aptoVegetariano=false)
+	const hamCarne = new HamburguesaDeCarne(pan=panCasero)
 	
-	const hamVege = new HamburguesaVegetariana(pan=panMasaMadre, peso=250, aptoVegetariano=true, legumbreUsada="garbanzos")
+	const hamVege = new HamburguesaVegetariana(pan=panMasaMadre, legumbreUsada="garbanzos")
 	
-	const provoleta = new Provoleta(tieneEspecias=true, peso=190, aptoVegetariano=false)
+	const provoleta = new Provoleta(tieneEspecias=true, peso=190)
 	
-	const parrillada = new Parrillada(aptoVegetariano=false, peso=500)
+	const parrillada = new Parrillada()
 	
 	method initialize() {
 		
-		parrillada.cortesPedidos(asado)
-		parrillada.cortesPedidos(entrania)
-		parrillada.cortesPedidos(chorizo)
+		parrillada.cortesPedidos(new Corte(nombre="asado", peso=250, calidad=10))
+		parrillada.cortesPedidos(new Corte(nombre="entrania", peso=200, calidad=7))
+		parrillada.cortesPedidos(new Corte(nombre="chorizo", peso=50, calidad=8))
 	}
 	
 	test "Valoración de la Hambruguesa de Carne con pan casero" {

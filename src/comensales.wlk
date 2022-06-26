@@ -1,9 +1,12 @@
+/* 
+en ```estaSatisfecho()``` de PaladarFino le tiraste el even() a la coleccion un lugar de a un numero: Era así: ```comidaIngerida.size().even()```
+*/
 import comidas.*
 
 class Comensales {
 	var property peso 
-	var comidaIngerida = []
-	const property comidaQueLeGusta = #{}
+	const comidaIngerida = []
+
 	
 	method leAgrada(unaComida)
 	
@@ -41,7 +44,7 @@ class PaladarFino inherits Comensales{
 	}
 	
 	override method estaSatisfecho(){
-		return super() and comidaIngerida.even()
+		return super() and comidaIngerida.size().even()
 	}
 	
 }
